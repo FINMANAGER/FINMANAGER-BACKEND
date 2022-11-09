@@ -1,14 +1,13 @@
-import express from "express";
-import res from "express/lib/response";
+const express = require("express") ;
 
 const app = express()
 
 const port = 3000
 
-app.get('/', () => {
+app.get('/', (req, res) => {
     res.send('Hello Fintech-team9')
 })
 
 app.listen(port, () => {
-    consolelog(`App Listening on port ${port}`)
+    console.log(`App Listening on port ${port}`)
 })
