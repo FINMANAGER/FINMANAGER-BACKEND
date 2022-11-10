@@ -26,7 +26,7 @@ To get started running this API locally, clone this [repository](https://github.
 npm install
 ```
 
-*** For Contributors to this project ***
+***For Contributors to this project***
 - For contributors to this project switch to the dev brach to make any modifications
 ```
 git checkout dev or git switch dev
