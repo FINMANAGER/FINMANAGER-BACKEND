@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=New budg, initial-scale=1.0">
+    <title>Create a budget</title>
+</head>
+<body>
+    <h1> Budgets</h1>
+    <ul>
+        <% for (let budget of budgets) {%>
+            <li><a href="/budgets/<%= budget._id %>"><%= budget.budget %> -  <%= budget.date%> </a> </li> 
+        <% } %>
+    </ul>
+</body>
+</html>
