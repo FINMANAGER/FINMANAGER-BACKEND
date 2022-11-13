@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# FINMANAGER-BACKEND
-=======
 # FINMANAGER-BACKEND
 
 ## API FOR FINMANAGER APP
@@ -49,49 +45,3 @@ node server.js
 
 ### Acknolegements
  - Fintech-team9 GADs 2022 Community project Team.
-
-
-
-
-
-
->>>>>>> e992b90... update: modified project README.md file
-=======
-# FINMANAGER-BACKEND
-<?php
-class User {
-  // Holds the app’s current MySQLi object
-  private $_mysqli;
-
-  // Use the class constructor to store the passed MySQLi object
-  public function __construct($mysqli) {
-    $this->_mysqli = $mysqli;
-  }
-
-  // Here are the user chores we need to handle
-  public function createUser() {
-
-  }
-  public function verifyUser() {
-
-  }
-  public function signInUser() {
- }
-  public function sendPasswordReset() {
-
-  }
-  public function resetPassword() {
-
-  }
-  public function getDistanceUnit() {
-
-  }
-  public function updateDistanceUnit() {
-
-  }
-  public function deleteUser() {
-
-  }
-}
-?>
->>>>>>> 4c9d7fd796a56de1a3e4fb0e5e4c02f2615d589f
