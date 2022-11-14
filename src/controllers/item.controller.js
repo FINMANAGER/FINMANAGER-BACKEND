@@ -1,38 +1,60 @@
-export const createItem = (req, res) => {
-  const item = req.body;
+import { firestore } from "firebase";
+export const createItem = async (req, res) => {
   try {
-    // add logic for saving the item that i user is spendding on
-    res.status(201).json(item);
+    const item = req.body;
+    const itemResponse = await firestore.collection("user").doc().set(item);
+    res.status(201).json(itemResponse);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ errorMessage: error.message });
   }
 };
 
-export const getItems = (req, res) => {
+export const getItems = async (_req, res) => {
   try {
-    // add logic for retrieving items the user spent on
-    res.status(200).json(item);
+    const itemResponse = await firestore.collection("user").get().doc();
+    if (!itemResponse) {
+      res.status(404).json({ errorMessage: "no items found" });
+    }
+    res.status(200).json(itemResponse);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ errorMessage: error.message });
+  }
+};
+
+export const getItem = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const item = req.body;
+    const selectedItem = await collection("user").doc(id);
+    if (!selectedItem) {
+      res.status(404).json({ errorMessage: "item not found" });
+    }
+    const updatedItem = await selectedItem.update(item);
+    res.status(200).json(updatedItem);
+  } catch (error) {
+    res.status(500).json({ errorMessage: error.message });
   }
 };
 
 export const updateItem = (req, res) => {
-  const id = req.body.id;
   try {
-    // add logic for updating the item
+    const id = req.params.id;
+    const item = collection("user").doc(id).get().data();
+    if (!item) {
+      res.status(404).json({ errorMessage: "item not found" });
+    }
     res.status(200).json(item);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ errorMessage: error.message });
   }
 };
 
-export const deleteItem = (req, res) => {
-  const id = req.params.id;
+export const deleteItem = async (req, res) => {
   try {
-    // add logic for deleting an item the item
+    const id = req.params.id;
+    await collection("user").doc(id).delete();
     res.status(200).json(item);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ errorMessage: error.message });
   }
 };
