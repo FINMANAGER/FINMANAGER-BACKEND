@@ -1,8 +1,9 @@
-import { firestore } from "firebase";
+import  pkg  from "firebase-admin";
+const {fireStore } = pkg
 export const createItem = async (req, res) => {
   try {
     const item = req.body;
-    const itemResponse = await firestore.collection("user").doc().set(item);
+    const itemResponse = await fireStore.collection("user").doc().set(item);
     res.status(201).json(itemResponse);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
@@ -11,7 +12,7 @@ export const createItem = async (req, res) => {
 
 export const getItems = async (_req, res) => {
   try {
-    const itemResponse = await firestore.collection("user").get().doc();
+    const itemResponse = await fireStore.collection("user").get().doc();
     if (!itemResponse) {
       res.status(404).json({ errorMessage: "no items found" });
     }
