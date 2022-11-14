@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import itemRouter from "./routes/item.router.js";
 import userRouter from "./routes/user.router.js";
+import budgetRouter from "./routes/budget.router.js";
 dotenv.config();
 // const swaggerDocument = require("./api-docs/swagger.json");
 
@@ -19,6 +20,7 @@ const port = process.env.SERVER_PORT || 3000;
 // app.use("/api-docs", serve, setup(swaggerDocument));
 
 app.use("/spending", itemRouter);
+app.use("/budget", budgetRouter)
 app.use("/auth", userRouter);
 
 app.listen(port, () => {
