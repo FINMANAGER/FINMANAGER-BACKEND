@@ -19,6 +19,10 @@ const port = process.env.SERVER_PORT || 3000;
 
 // app.use("/api-docs", serve, setup(swaggerDocument));
 
+app.get('/', (req, res) => {
+  res.send('Hello Fintech-team9')
+})
+
 app.use("/spending", itemRouter);
 app.use("/budget", budgetRouter)
 app.use("/auth", userRouter);
