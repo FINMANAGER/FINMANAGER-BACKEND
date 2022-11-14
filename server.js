@@ -5,6 +5,8 @@ const swaggerDocument = require('./api-docs/swagger.json');
 
 const spenddingRouter = require("./spending");
 
+const budgetRouter = require("./budget");
+
 const app = express()
 
 const port = 3000
