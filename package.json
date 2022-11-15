@@ -4,6 +4,8 @@
   "description": "Finmanager app backend API",
   "main": "server.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +23,13 @@
     "firebase-admin": "^11.2.1",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0"
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.10"
+  }
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
