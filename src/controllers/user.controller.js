@@ -1,7 +1,8 @@
 import pkg from "firebase-admin";
-const { auth } = pkg
+const { auth } = pkg;
 export const signIn = async (req, res) => {
   const { username, password } = req.body;
+  console.log(req.body);
   const user = await fireStore
     .auth()
     .signInWithEmailAndPassword(username, password);

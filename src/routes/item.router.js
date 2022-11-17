@@ -8,6 +8,7 @@ import {
 
 const itemRouter = Router();
 
+// itemRouter.get("/", getItems);
 itemRouter.get("/", getItems);
 itemRouter.post("/", createItem);
 itemRouter.put("/:id", updateItem);

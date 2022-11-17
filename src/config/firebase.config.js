@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase-admin";
-
-const firebaseConfig = {
+import dotenv from "dotenv";
+dotenv.config();
+export const firebaseConfig = {
   apiKey: process.env.API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
   databaseURL: process.env.DATABASE_URL,
@@ -9,5 +9,3 @@ const firebaseConfig = {
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID,
 };
-
-const app = initializeApp(firebaseConfig);

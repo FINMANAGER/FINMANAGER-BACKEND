@@ -1,10 +1,19 @@
-import  pkg  from "firebase-admin";
-const {fireStore } = pkg
+import {
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore/lite";
+import { firebase_db } from "../models/index.js";
+const colRef = collection(firebase_db, "users");
+
 export const createItem = async (req, res) => {
   try {
     const item = req.body;
-    const itemResponse = await fireStore.collection("user").doc().set(item);
-    res.status(201).json(itemResponse);
+    await addDoc(colRef, { ...item }).then((docRef) => {
+      res.status(201).json({ id: docRef.id });
+    });
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
@@ -12,11 +21,21 @@ export const createItem = async (req, res) => {
 
 export const getItems = async (_req, res) => {
   try {
-    const itemResponse = await fireStore.collection("user").get().doc();
-    if (!itemResponse) {
+    const users = [];
+    await getDocs(colRef)
+      .then((snapshort) => {
+        snapshort.docs.forEach((doc) => {
+          users.push({ id: doc.id, ...doc.data() });
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+
+    if (users.length < 1) {
       res.status(404).json({ errorMessage: "no items found" });
     }
-    res.status(200).json(itemResponse);
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
