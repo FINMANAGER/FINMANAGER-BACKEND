@@ -1,7 +1,7 @@
 class Spend {
-    constructor (id, date, amount, category){
+    constructor (id, amount, category){
         this.id = id;
-        this.date = date;
+        this.date = Date.now();
         this.amount = amount;
         this.category = category;
     }

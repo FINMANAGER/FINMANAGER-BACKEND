@@ -1,16 +1,22 @@
 const express =  require("express");
 const spending = express.Router();
+const {
+    addExpenditure,
+    getExpenditure,
+    editExpenditure,
+    summary
+} = require('./controllers/spendingController.js');
+
+const {
+    addCategory,
+    getCategories
+} = require('./controllers/categoryController.js') ;
 
 /****************************
  * SPENDING DETAILS * 
  ****************************/
 // Get all spending details (Categories)
-spending.get("/", (req, res) => {
-    
-    // Todo: get the lsit of all the uses spending details sorted by date
-
-    res.send("Example: Fuel, food, leisure")
-})
+spending.get("/", getExpenditure);
 
 /***
  * Post the spending which includes
@@ -18,20 +24,10 @@ spending.get("/", (req, res) => {
  * category - the ategory which you spent on
  * price / amount: the amount of money that was spent 
  */
-spending.post("/", (req, res) => {
-    const date = Date.now();
-    const category = req.body.category;
-    const amount = req.body.amount;
-
-    //Todo: function to check if spending can occur within the given budget
-})
+spending.post("/", addExpenditure);
 
 // Update details
-spending.put("/", (req, res) => {
-    const date  = req.body.date
-    const category = req.body.category;
-    const amount = req.body.amount;
-})
+spending.put("/", editExpenditure);
 
 /**
  * Get monthly spending summary 
@@ -39,10 +35,7 @@ spending.put("/", (req, res) => {
  *             month and by the sum of expenditure per category.
  *             It will also display the total spend in a month
  */
- spending.get("/summary", (req, res) => {
-    // Get monthly spending by sum of category
-    res.send("Expenditure by month")
-})
+ spending.get("/summary", summary)
 
 /****************************
  * SPENDING CATEGORIES * 
@@ -51,16 +44,12 @@ spending.put("/", (req, res) => {
 /**
  * Add new spending category to users categories
  */
-spending.post("/category", (req, res) => {
-    // List add new spending catefgory that does not exist.
-})
+spending.post("/category", addCategory);
 
 /**
  * Get All categories listed by the user
  */
-spending.get("/category", (req, res) => {
-    res.send("All categories")
-})
+spending.get("/category", getCategories)
 
 
 module.exports = spending
