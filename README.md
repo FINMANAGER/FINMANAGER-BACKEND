@@ -44,14 +44,4 @@ node server.js
 - To view the API documentations, run the following from your browser http://localhost:3000/api-docs/
 
 ### Acknolegements
-<<<<<<< HEAD
  - Fintech-team9 GADs 2022 Community project Team.
-
-
-
-
-
-
-=======
- - Fintech-team9 GADs 2022 Community project Team.
->>>>>>> 1c7c7aff459f421da5facf5f21646056b97d1a89
