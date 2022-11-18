@@ -21,7 +21,8 @@
               }
             }
           }
-        }
+        },
+        "tags" : [ "Spending" ]
       },
       "post" : {
         "summary" : "Submit spending action and deduct from final budget",
@@ -39,7 +40,8 @@
           "201" : {
             "description" : "Spending added"
           }
-        }
+        },
+        "tags" : [ "Spending" ]
       }
     },
     "/spending/category" : {
@@ -57,7 +59,8 @@
               }
             }
           }
-        }
+        },
+        "tags" : [ "Spending" ]
       },
       "post" : {
         "summary" : "Add new category",
@@ -79,7 +82,8 @@
           "405" : {
             "description" : "Category exists"
           }
-        }
+        },
+        "tags" : [ "Spending" ]
       }
     },
     "/spending/category/{id}" : {
@@ -109,7 +113,8 @@
               }
             }
           }
-        }
+        },
+        "tags" : [ "Spending" ]
       },
       "put" : {
         "summary" : "Update category name",
@@ -130,7 +135,8 @@
           "201" : {
             "description" : "Updated"
           }
-        }
+        },
+        "tags" : [ "Spending" ]
       }
     },
     "/spending/summary" : {
@@ -141,7 +147,8 @@
           "200" : {
             "description" : "Success"
           }
-        }
+        },
+        "tags" : [ "Spending" ]
       }
     },
     "/budget" : {
@@ -159,7 +166,8 @@
               }
             }
           }
-        }
+        },
+        "tags" : [ "Budget" ]
       },
       "post" : {
         "summary" : "Create a budget for a user",
@@ -178,7 +186,8 @@
           "201" : {
             "description" : "Budget created"
           }
-        }
+        },
+        "tags" : [ "Budget" ]
       }
     },
     "/budget/{id}" : {
@@ -201,7 +210,8 @@
           "200" : {
             "description" : "Success"
           }
-        }
+        },
+        "tags" : [ "Budget" ]
       },
       "delete" : {
         "summary" : "Delete budget",
@@ -222,7 +232,8 @@
           "204" : {
             "description" : "Deleted"
           }
-        }
+        },
+        "tags" : [ "Budget" ]
       }
     },
     "/budget/{id}/edit" : {
@@ -245,13 +256,14 @@
           "202" : {
             "description" : "updated"
           }
-        }
+        },
+        "tags" : [ "Budget" ]
       }
     }
   },
   "servers" : [ {
     "description" : "SwaggerHub API Auto Mocking",
-    "url" : "http://localhost:3000/api-docs"
+    "url" : "https://virtserver.swaggerhub.com/ELCIDCHAWA/finmanager/1.0.0"
   } ],
   "components" : {
     "schemas" : {
@@ -363,5 +375,16 @@
         }
       }
     }
-  }
+  },
+  "tags" : [ {
+    "name" : "Users"
+  }, {
+    "name" : "Profile"
+  }, {
+    "name" : "Authentication"
+  }, {
+    "name" : "Spending"
+  }, {
+    "name" : "Budget"
+  } ]
 }
