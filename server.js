@@ -1,19 +1,20 @@
 const express = require("express") ;
-
+var bodyParser = require("body-parser");
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./api-docs/swagger.json');
+const { port } = require("./config");
 
 const spenddingRouter = require("./spending");
 
-const budgetRouter = require("./budget");
+// const budgetRouter = require("./budget");
 
 const app = express()
-
-const port = 3000
 
 app.get('/', (req, res) => {
     res.send('Hello Fintech-team9')
 })
+
+app.use(bodyParser.json())
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
