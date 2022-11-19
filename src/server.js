@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
 import itemRouter from "./routes/item.router.js";
-// import userRouter from "./routes/user.router.js";
+import userRouter from "./routes/user.router.js";
 // import budgetRouter from "./routes/budget.router.js";
 
 // const swaggerDocument = require("./api-docs/swagger.json");
@@ -22,7 +22,7 @@ const port = process.env.SERVER_PORT || 3000;
 
 app.use("/item", itemRouter);
 // app.use("/budget", budgetRouter);
-// app.use("/auth", userRouter);
+app.use("/auth", userRouter);
 
 // const docRef = doc(db, "users", "Zp2PuhXrPL7olqaw6Gnx");
 // deleteDoc(docRef).then(() => {

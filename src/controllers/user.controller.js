@@ -1,30 +1,50 @@
-import pkg from "firebase-admin";
-const { auth } = pkg;
-export const signIn = async (req, res) => {
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+
+const auth = getAuth();
+export const signUp = async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body);
-  const user = await fireStore
-    .auth()
-    .signInWithEmailAndPassword(username, password);
-  const token = user.getIdToken();
-  res.status(200).cookie(accessToken, token);
+  const userCredentials = await createUserWithEmailAndPassword(
+    auth,
+    username,
+    password
+  );
+  const user = userCredentials.user;
+  user.getIdToken(true).then((token) => {
+    res.status(201).cookie("accessToken", token).json({ username: user.email });
+  });
 };
 
-export const signUp = async (req, res) => {
+export const signIn = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const userResponse = await auth.createUserWithEmailAndPassword(
+    const userCredentials = await signInWithEmailAndPassword(
+      auth,
       username,
       password
     );
+    if (!userCredentials) throw Error("invalid username or password");
+    const logedinUser = userCredentials.user;
+    logedinUser.getIdToken(true).then((token) => {
+      res
+        .status(200)
+        .cookie("accessToken", token)
+        .json({ username: logedinUser.email });
+    });
   } catch (error) {
-    res.status(400).json({ errorMessage: "an error has occured" });
+    res.status(400).json({ errorMessage: "invalid username or password" });
   }
 };
 
-export const signOut = async (req, res) => {
+export const logOut = async (req, res) => {
   try {
-    await auth.signOut();
+    await signOut(auth).then(() => {
+      res.status(204).json({});
+    });
   } catch (error) {
     res.status(400).json({ errorMessage: "an error has occured" });
   }
