@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 //  * amount: the amount of money that was add 
 //  */
 app.post("/budgets", async (req, res) => {
-    const date = Date.now();
+    const date = Date.now().toLocaleDateString();
     const budget = new Budget(req.body.budget);
     await budget.save()
      res.redirect(`/budgets/${budget._id}`)
@@ -84,8 +84,8 @@ app.get("/budgets/:id/edit", async(req, res) => {
 app.put("/budgets/:id", async(req, res) => {
     // res.send("UPDATED!!!")
     const {id}= req.params
-    if( !mongoose.Types.ObjectId.isValid(id) ) return false;
-    const budget =await Budget.findByIdAndUpdate(id, {budget: {...req.body.budget}})
+    //if( !mongoose.Types.ObjectId.isValid(id) ) return false;
+    const budget =await Budget.findByIdAndUpdate(id, {...req.body.budget});
     res.redirect(`/budgets/${budget.id}`)
 
 })
@@ -97,7 +97,7 @@ app.put("/budgets/:id", async(req, res) => {
 app.delete("/budgets/:id", async(req, res) => {
     // res.send("UPDATED!!!")
     const {id}= req.params
-    const budget =await Budget.findByIdAndDelete(id)
+    const budget =await Budget.findByIdAndDelete(id, { ... req.params})
     res.redirect('/budgets')
 
 })
