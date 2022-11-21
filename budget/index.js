@@ -102,7 +102,7 @@ app.delete("/budgets/:id", async(req, res) => {
 
 })
 
-app.listen(3000, ()=>{
-    console.log('serving on port 3000')
+app.listen(3002, ()=>{
+    console.log('serving on port 3001')
 })
 //module.exports = budget
