@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import {
   collection,
   getDocs,
@@ -6,20 +7,25 @@ import {
   doc,
 } from "firebase/firestore/lite";
 import { firebase_db } from "../models/index.js";
-const colRef = collection(firebase_db, "users");
+// const colRef = collection(firebase_db, "spending");
+const colRef = firebase_db.collection("spending");
 
-export const createItem = async (req, res) => {
+export const addExpenditure = async (req, res) => {
   try {
-    const item = req.body;
+    /* const item = req.body;
     await addDoc(colRef, { ...item }).then((docRef) => {
       res.status(201).json({ id: docRef.id });
-    });
+    }); */
+    const data  = req.body;
+    const uid = rqr.query.uid;
+    await colRef.doc(uid).collection().doc('data').set({...data}, {merge: true});
+    res.status(201).json({message: "Added Expenditure"})
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
 };
 
-export const getItems = async (_req, res) => {
+export const getExpenditure = async (_req, res) => {
   try {
     const users = [];
     await getDocs(colRef)
@@ -56,7 +62,7 @@ export const getItem = async (req, res) => {
   }
 };
 
-export const updateItem = (req, res) => {
+export const editExpenditure = (req, res) => {
   try {
     const id = req.params.id;
     const item = collection("user").doc(id).get().data();
@@ -77,4 +83,8 @@ export const deleteItem = async (req, res) => {
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
+};
+
+export const summary = async (req, res) => {
+
 };
