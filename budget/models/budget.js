@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const budgetSchema = new Schema({
     budget: Number,
-    date: Date 
+    date:{type:Date, default: new Date()} 
 });
 
 module.exports= mongoose.model('budget', budgetSchema);
