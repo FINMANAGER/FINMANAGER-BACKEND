@@ -7,8 +7,7 @@ import {
   doc,
 } from "firebase/firestore/lite";
 import { firebase_db } from "../models/index.js";
-// const colRef = collection(firebase_db, "spending");
-const colRef = firebase_db.collection("spending");
+const colRef = collection(firebase_db, "spending");
 
 export const addExpenditure = async (req, res) => {
   try {
@@ -18,7 +17,9 @@ export const addExpenditure = async (req, res) => {
     }); */
     const data  = req.body;
     const uid = rqr.query.uid;
-    await colRef.doc(uid).collection().doc('data').set({...data}, {merge: true});
+    await addDoc(colRef, { ...item }).then((docRef) => {
+      res.status(201).json({ id: docRef.id });
+    });
     res.status(201).json({message: "Added Expenditure"})
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });

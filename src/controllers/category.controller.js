@@ -7,8 +7,7 @@ import {
   doc,
 } from "firebase/firestore/lite";
 import { firebase_db } from "../models/index.js";
-// const colRef = collection(firebase_db, "category");
-const colRef = firebase_db.collection("category");
+const colRef = collection(firebase_db, "category");
 
 export const addCategory = async (req, res) => {
 
