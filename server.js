@@ -5,6 +5,7 @@ const swaggerDocument = require('./api-docs/swagger.json');
 const { port } = require("./config");
 
 const spenddingRouter = require("./spending");
+const authRouter = require("./users/routes/auth.router")
 
 // const budgetRouter = require("./budget");
 
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
 app.use(bodyParser.json())
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-
+app.use("/", authRouter)
 app.use("/spending", spenddingRouter)
 
 app.listen(port, () => {
