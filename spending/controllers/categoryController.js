@@ -1,7 +1,6 @@
 const Category = require("../models/category");
-const db = require('../../db')
-const firestore = db.firestore();
-const collection = firestore.collection("category");
+const firestore = require('../../db')
+const collection = firestore.db.collection("category");
 
 // Add category
 addCategory = async (req, res, next) => {

@@ -1,8 +1,7 @@
 const express = require('express')
 router = express.Router()
-const db = require("../../db");
-const firestore = db.firestore();
-const collection = firestore.collection('spending');
+const firestore = require("../../db");
+const collection = firestore.db.collection('spending');
 
 const Spend = require("../models/spend");
 
