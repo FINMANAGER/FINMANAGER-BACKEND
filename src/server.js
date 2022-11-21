@@ -4,7 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
-import itemRouter from "./routes/item.router.js";
+import spendingRouter from "./routes/spending.router.js";
 import userRouter from "./routes/user.router.js";
 // import budgetRouter from "./routes/budget.router.js";
 
@@ -20,7 +20,7 @@ const port = process.env.SERVER_PORT || 3000;
 
 // app.use("/api-docs", serve, setup(swaggerDocument));
 
-app.use("/item", itemRouter);
+app.use("/spending", spendingRouter);
 // app.use("/budget", budgetRouter);
 app.use("/auth", userRouter);
 
