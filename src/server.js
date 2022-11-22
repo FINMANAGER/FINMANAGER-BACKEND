@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 dotenv.config();
 import spendingRouter from "./routes/spending.router.js";
 import userRouter from "./routes/user.router.js";
-// import budgetRouter from "./routes/budget.router.js";
+import budgetRouter from "./routes/budget.router.js";
 
-// const swaggerDocument = require("./api-docs/swagger.json");
+import swaggerDocument from "../api-docs/swagger.json" assert {type: 'json'};
 
 const app = express();
 app.use(express.json());
@@ -18,10 +18,14 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = process.env.SERVER_PORT || 3000;
 
-// app.use("/api-docs", serve, setup(swaggerDocument));
+app.get('/', (req, res) => {
+  res.send("Welcome to FINMANAGER API. visit the /api-docs endpoint")
+})
+
+app.use("/api-docs", serve, setup(swaggerDocument));
 
 app.use("/spending", spendingRouter);
-// app.use("/budget", budgetRouter);
+app.use("/budget", budgetRouter);
 app.use("/auth", userRouter);
 
 // const docRef = doc(db, "users", "Zp2PuhXrPL7olqaw6Gnx");
