@@ -18,9 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = process.env.SERVER_PORT || 3000;
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send("Welcome to FINMANAGER API. visit the /api-docs endpoint")
-})
+});
 
 app.use("/api-docs", serve, setup(swaggerDocument));
 
