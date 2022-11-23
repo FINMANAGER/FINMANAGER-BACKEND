@@ -16,7 +16,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/spending"
+                  "$ref" : "#/components/schemas/spendingList"
                 }
               }
             }
@@ -93,14 +93,7 @@
         "parameters" : [ {
           "in" : "path",
           "name" : "id",
-          "required" : true,
-          "content" : {
-            "applicatio/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/category"
-              }
-            }
-          }
+          "required" : true
         } ],
         "responses" : {
           "200" : {
@@ -122,18 +115,18 @@
         "parameters" : [ {
           "in" : "path",
           "name" : "id",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/category"
-              }
-            }
-          }
+          "required" : true
         } ],
         "responses" : {
           "201" : {
-            "description" : "Updated"
+            "description" : "Updated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/category"
+                }
+              }
+            }
           }
         },
         "tags" : [ "Spending" ]
@@ -197,18 +190,18 @@
         "parameters" : [ {
           "in" : "path",
           "name" : "id",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/budget"
-              }
-            }
-          }
+          "required" : true
         } ],
         "responses" : {
           "200" : {
-            "description" : "Success"
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/budget"
+                }
+              }
+            }
           }
         },
         "tags" : [ "Budget" ]
@@ -219,18 +212,18 @@
         "parameters" : [ {
           "in" : "path",
           "name" : "id",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/budget"
-              }
-            }
-          }
+          "required" : true
         } ],
         "responses" : {
           "204" : {
-            "description" : "Deleted"
+            "description" : "Deleted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/budget"
+                }
+              }
+            }
           }
         },
         "tags" : [ "Budget" ]
@@ -271,8 +264,7 @@
         "type" : "object",
         "properties" : {
           "id" : {
-            "type" : "integer",
-            "format" : "int64"
+            "type" : "string"
           },
           "date" : {
             "type" : "string",
@@ -288,12 +280,19 @@
         },
         "description" : "spending details schema. Has the date, category, amount paid"
       },
+      "spendingList" : {
+        "description" : "List of sendings",
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/spending"
+        }
+      },
       "category" : {
         "description" : "category of spending or spending habits sucn as (fuel, food, leisure, insurance ...)",
         "type" : "object",
         "properties" : {
           "id" : {
-            "type" : "integer"
+            "type" : "string"
           },
           "name" : {
             "type" : "string"
