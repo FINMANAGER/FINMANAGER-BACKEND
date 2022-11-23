@@ -16,7 +16,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send("Welcome to FINMANAGER API. visit the /api-docs endpoint")
