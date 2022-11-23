@@ -1,7 +1,7 @@
 import { getAuth } from "firebase/auth";
 export default async function authUser(req, res, next){
     try {
-      const currentUser =  getAuth().currentUser;
+      const currentUser =  await getAuth().currentUser;
       req.uid = currentUser.uid;
       req.email = currentUser.email;
       next();
