@@ -6,6 +6,89 @@
     "description" : "Finmanager backend API documentation"
   },
   "paths" : {
+
+    "/auth/sign-up": {
+      "post": {
+         "summary": "Create auth user",
+         "description": "Create auth user to sign in to application",
+         "requestBody": {
+            "content": {
+              "application/json": {
+                "schema":{
+                  "type": "object",
+                  "properties":{
+                    "username":{
+                      "type":"string"
+                    },
+                    "password":{
+                      "type":"string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+         "responses":{
+            "201" : {
+              "description": "User created"
+            },
+            "500": {
+              "description": "user already exist"
+            }
+         },
+        "tags": [ "Authentication" ]
+      }
+    },
+
+    "/auth/sign-in": {
+        "post": {
+           "summary": "User sign in",
+           "description": "Sign in to application",
+           "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema":{
+                    "type": "object",
+                    "properties":{
+                      "username":{
+                        "type":"string"
+                      },
+                      "password":{
+                        "type":"string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+           "responses":{
+              "200" : {
+                "description": "User signed in"
+              },
+              "400": {
+                "description": "user already signed in"
+              }
+           },
+          "tags": [ "Authentication" ]
+        }
+    },
+
+    "/auth/sign-out": {
+      "post": {
+         "summary": "User sign out",
+         "description": "Sign out from application",
+         "responses":{
+            "204" : {
+              "description": "User signed out"
+            },
+            "400": {
+              "description": "user already signed in"
+            }
+         },
+        "tags": [ "Authentication" ]
+      }
+  },    
+
     "/spending" : {
       "get" : {
         "summary" : "Get all spending details (Categories)",
@@ -375,15 +458,21 @@
       }
     }
   },
-  "tags" : [ {
-    "name" : "Users"
-  }, {
-    "name" : "Profile"
-  }, {
-    "name" : "Authentication"
-  }, {
-    "name" : "Spending"
-  }, {
-    "name" : "Budget"
-  } ]
+  "tags" : [ 
+    {
+      "name" : "Users"
+    }, 
+    {
+        "name" : "Profile"
+    }, 
+    {
+        "name" : "Authentication"
+    }, 
+    {
+        "name" : "Spending"
+    }, 
+    {
+        "name" : "Budget"
+    } 
+  ]
 }
