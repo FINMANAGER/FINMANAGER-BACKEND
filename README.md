@@ -25,11 +25,23 @@ To get started running this API locally, clone this [repository](https://github.
 ```
 npm install
 ```
+- make sure you have created a project on firebase and added Authentication and Cloud Firestore
+- create ***.env** file and add the firestore credentials in it
+```txt
+PORT=3000
+API_KEY="your-api-key"
+AUTH_DOMAIN="your-auth-domain"
+DATABASE_URL=
+PROJECT_ID="your-project-id"
+STORAGE_BUCKET="your-storage-bucket"
+MESSAGING_SENDER_ID="your-messagind-id"
+APP_ID="your-app-id"
+```
 
 ***For Contributors to this project***
 - For contributors to this project switch to the dev brach to make any modifications
 ```
-git checkout dev-aron or git switch dev-aron
+git checkout origin/dev-aron or git switch origin/dev-aron
 ```
 - 
 
