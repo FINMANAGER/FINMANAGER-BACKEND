@@ -12,15 +12,17 @@ import {
   getCategories
 } from "../controllers/category.controller.js";
 
+import authUser from "../middlewares/auth.middleware.js";
+
 const spendingRouter = Router();
 
-spendingRouter.get("/", getExpenditure);
+spendingRouter.get("/", authUser, getExpenditure);
 spendingRouter.get("/summary", summary);
-spendingRouter.post("/", addExpenditure);
-spendingRouter.put("/:id", editExpenditure);
-spendingRouter.delete("/:id", deleteItem);
+spendingRouter.post("/", authUser, addExpenditure);
+spendingRouter.put("/", authUser, editExpenditure);
+spendingRouter.delete("/", authUser, deleteItem);
 
-spendingRouter.post("/category", addCategory);
-spendingRouter.get("/category", getCategories);
+spendingRouter.post("/category", authUser, addCategory);
+spendingRouter.get("/category", authUser, getCategories);
 
 export default spendingRouter;
