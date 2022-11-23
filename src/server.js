@@ -9,6 +9,7 @@ import userRouter from "./routes/user.router.js";
 import budgetRouter from "./routes/budget.router.js";
 
 import swaggerDocument from "../api-docs/swagger.json" assert {type: 'json'};
+import profileRouter from "./routes/profile.router.js";
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 
 app.use("/api-docs", serve, setup(swaggerDocument));
 
+app.use("/profile", profileRouter)
 app.use("/spending", spendingRouter);
 app.use("/budget", budgetRouter);
 app.use("/auth", userRouter);
