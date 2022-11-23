@@ -1,13 +1,12 @@
-import { async } from "@firebase/util";
 import {
   collection,
   getDocs,
-  addDoc,
+  setDoc,
   deleteDoc,
   doc,
+  updateDoc
 } from "firebase/firestore/lite";
 import { firebase_db } from "../models/index.js";
-const colRef = collection(firebase_db, "spending");
 
 export const addExpenditure = async (req, res) => {
   try {
@@ -16,33 +15,37 @@ export const addExpenditure = async (req, res) => {
       res.status(201).json({ id: docRef.id });
     }); */
     const data  = req.body;
-    const uid = rqr.query.uid;
-    await addDoc(colRef, { ...item }).then((docRef) => {
-      res.status(201).json({ id: docRef.id });
-    });
-    res.status(201).json({message: "Added Expenditure"})
+    const uid = req.uid;
+    const colRef = collection(firebase_db, "spending", uid, "data");
+    
+    await setDoc(doc(colRef), { ...data }, {merge: true}).then(() => {
+      res.status(201).send("Success");
+    })
   } catch (error) {
-    res.status(500).json({ errorMessage: error.message });
+    console.log(error)
+    res.status(500).send("Unable to add spending");
   }
 };
 
 export const getExpenditure = async (_req, res) => {
   try {
-    const users = [];
+    const uid = _req.uid;
+    const colRef = collection(firebase_db, "spending", uid, "data");
+    const spendings = [];
     await getDocs(colRef)
       .then((snapshort) => {
         snapshort.docs.forEach((doc) => {
-          users.push({ id: doc.id, ...doc.data() });
+          spendings.push({ id: doc.id, ...doc.data() });
         });
       })
       .catch((error) => {
         console.log(error.message);
       });
 
-    if (users.length < 1) {
+    if (spendings.length < 1) {
       res.status(404).json({ errorMessage: "no items found" });
     }
-    res.status(200).json(users);
+    res.status(200).json(spendings);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
@@ -63,24 +66,30 @@ export const getItem = async (req, res) => {
   }
 };
 
-export const editExpenditure = (req, res) => {
+export const editExpenditure = async (req, res) => {
   try {
-    const id = req.params.id;
-    const item = collection("user").doc(id).get().data();
-    if (!item) {
-      res.status(404).json({ errorMessage: "item not found" });
-    }
-    res.status(200).json(item);
+    const id = req.query.id;
+    const data = req.body;
+    const uid = req.uid;
+    const colRef = collection(firebase_db, "spending", uid, "data");
+    await updateDoc(doc(colRef, id), {...data}, {merge: true}).then(() => {
+      res.status(202).send("Updated")
+    })
+  
   } catch (error) {
+    console.log(error);
     res.status(500).json({ errorMessage: error.message });
   }
 };
 
 export const deleteItem = async (req, res) => {
   try {
-    const id = req.params.id;
-    await collection("user").doc(id).delete();
-    res.status(200).json(item);
+    const id = req.query.id;
+    const uid = req.uid;
+    const colRef = collection(firebase_db, "spending", uid, "data");
+    await deleteDoc(doc(colRef, id)).then(() => {
+      res.status(200).send("Deleted")
+    })
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
