@@ -11,6 +11,6 @@ const profileRouter = Router();
 
 profileRouter.post("/", authUser, initProfile);
 profileRouter.get("/", getProfile);
-profileRouter.put("/", authUser, editProfile);
+profileRouter.put("/edit/", authUser, editProfile);
 
 export default profileRouter;
