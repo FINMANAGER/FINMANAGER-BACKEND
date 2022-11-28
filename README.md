@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-# FINMANAGER-BACKEND
-
-=======
-
 # FINMANAGER-BACKEND
 
 ## API FOR FINMANAGER APP
