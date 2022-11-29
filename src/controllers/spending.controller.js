@@ -53,7 +53,7 @@ export const getExpenditure = async (_req, res) => {
 
 export const getItem = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.query.id;
     const item = req.body;
     const selectedItem = await collection("user").doc(id);
     if (!selectedItem) {
