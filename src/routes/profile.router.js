@@ -10,7 +10,7 @@ import authUser from "../middlewares/auth.middleware.js";
 const profileRouter = Router();
 
 profileRouter.post("/", authUser, initProfile);
-profileRouter.get("/", getProfile);
+profileRouter.get("/", authUser, getProfile);
 profileRouter.put("/edit/", authUser, editProfile);
 
 export default profileRouter;
