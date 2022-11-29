@@ -8,7 +8,7 @@ import spendingRouter from "./routes/spending.router.js";
 import userRouter from "./routes/user.router.js";
 import budgetRouter from "./routes/budget.router.js";
 
-// import swaggerDocument from "../api-docs/swagger.json" assert {type: 'json'};
+import swaggerDocument from "../api-docs/swagger.json" assert {type: 'json'};
 import profileRouter from "./routes/profile.router.js";
 
 const app = express();
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to FINMANAGER API. visit the /api-docs endpoint")
 });
 
-// app.use("/api-docs", serve, setup(swaggerDocument));
+app.use("/api-docs", serve, setup(swaggerDocument));
 
 app.use("/profile", profileRouter)
 app.use("/spending", spendingRouter);
