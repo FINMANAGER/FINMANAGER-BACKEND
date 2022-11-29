@@ -25,23 +25,40 @@ To get started running this API locally, clone this [repository](https://github.
 ```
 npm install
 ```
+- make sure you have created a project on firebase and added Authentication and Cloud Firestore
+- create ***.env** file and add the firestore credentials in it
+```txt
+PORT=3000
+API_KEY="your-api-key"
+AUTH_DOMAIN="your-auth-domain"
+DATABASE_URL=
+PROJECT_ID="your-project-id"
+STORAGE_BUCKET="your-storage-bucket"
+MESSAGING_SENDER_ID="your-messagind-id"
+APP_ID="your-app-id"
+```
 
 ***For Contributors to this project***
 - For contributors to this project switch to the dev brach to make any modifications
 ```
-git checkout dev or git switch dev
+git checkout origin/dev-aron or git switch origin/dev-aron
 ```
 - 
 
 ### Running the Project
-To run the project simply type the command
+To run the project in development mode
 
 ```
-node server.js
+npm run dev
 ```
 - This will start the server and you will be able to access the endpoints from http://localhost:3000
 
 - To view the API documentations, run the following from your browser http://localhost:3000/api-docs/
+
+To run the project in production mode
+```
+npm start
+```
 
 ### Acknolegements
  - Fintech-team9 GADs 2022 Community project Team.
