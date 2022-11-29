@@ -7,6 +7,7 @@ import {
     updateDoc
   } from "firebase/firestore/lite";
   import { firebase_db } from "../models/index.js";
+  import { getBudget, getUserSpending } from "../utils/functions.js"
   
   export const initProfile = async (req, res) => {
     try {
@@ -28,8 +29,7 @@ import {
             res.status(201).send("Success");
         })
     } catch (error) {
-      console.log(error)
-      res.status(500).send("Unable to add spending");
+      res.status(500).send("Pofile can be inintialized only once");
     }
   };
   
@@ -37,9 +37,12 @@ import {
     try {
       const uid = _req.uid;
       const colRef = collection(firebase_db, "profile", uid, "data");
+      const budget = await getBudget(collection, firebase_db, uid, getDocs);
+      const spending = await getUserSpending(collection, firebase_db, uid, getDocs);
+
       await getDocs(colRef)
         .then((snapshort) => {
-          res.status(200).json(snapshort.docs[0].data())
+          res.status(200).json({...snapshort.docs[0].data(), budget: {...budget}, spending: spending})
         })
     } catch (error) {
       res.status(400).json({ errorMessage: error.message });
