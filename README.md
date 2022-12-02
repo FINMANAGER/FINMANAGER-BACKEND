@@ -1,5 +1,5 @@
 # FINMANAGER-BACKEND
-
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c93d2738555241bda6c66e563421bd00)](https://www.codacy.com/gh/FINMANAGER/FINMANAGER-BACKEND/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FINMANAGER/FINMANAGER-BACKEND&amp;utm_campaign=Badge_Grade)
 ## API FOR FINMANAGER APP
 
 In partial completion of the community project phase for the GADs 2022 program, Fintech-team9 developed this API to serve the FINMANAGER app. This APP is to help Personal Financial Management for individuals' income and also helps them keep track of their spending habits.
