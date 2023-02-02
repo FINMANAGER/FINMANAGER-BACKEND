@@ -1,0 +1,279 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "FINMANAGER API",
+    "description" : "Finmanager backend API documentation"
+  },
+  "paths" : {
+
+    "/auth/sign-up": {
+      "post": {
+         "summary": "Create auth user",
+         "description": "Create auth user to sign in to application",
+         "requestBody": {
+            "content": {
+              "application/json": {
+                "schema":{
+                  "type": "object",
+                  "properties":{
+                    "username":{
+                      "type":"string"
+                    },
+                    "password":{
+                      "type":"string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+         "responses":{
+            "201" : {
+              "description": "User created"
+            },
+            "500": {
+              "description": "user already exist"
+            }
+         },
+        "tags": [ "Authentication" ]
+      }
+    },
+
+    "/auth/sign-in": {
+        "post": {
+           "summary": "User sign in",
+           "description": "Sign in to application",
+           "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema":{
+                    "type": "object",
+                    "properties":{
+                      "username":{
+                        "type":"string"
+                      },
+                      "password":{
+                        "type":"string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+           "responses":{
+              "200" : {
+                "description": "User signed in"
+              },
+              "400": {
+                "description": "user already signed in"
+              }
+           },
+          "tags": [ "Authentication" ]
+        }
+    },
+
+    "/auth/sign-out": {
+      "post": {
+         "summary": "User sign out",
+         "description": "Sign out from application",
+         "responses":{
+            "204" : {
+              "description": "User signed out"
+            },
+            "400": {
+              "description": "user already signed in"
+            }
+         },
+        "tags": [ "Authentication" ]
+      }
+  },    
+
+    "/spending" : {
+      "get" : {
+        "summary" : "Get all spending details (Categories)",
+        "description" : "This call is to get all the spercific categories of spending habits including the amount and time a spending was made",
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/spendingList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Submit spending action and deduct from final budget",
+        "description" : "This call will allow a use to submit an action made from spending. They will submit the category or generate one if it does not exit and add the amount spent. This amount should be less than the avaialble budget.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/spending"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Spending added"
+          }
+        }
+      }
+    },
+    "/spending/category" : {
+      "get" : {
+        "summary" : "Get all spending categories",
+        "description" : "This call will return all the categories of expenditures made.",
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/categories"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Add new category",
+        "description" : "This will add a new spending category to the list of the Users spening categories and only if they don't already exist.",
+        "requestBody" : {
+          "description" : "Request body to add a new category to the list of categories",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/category"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Category added"
+          },
+          "405" : {
+            "description" : "Category exists"
+          }
+        }
+      }
+    },
+    "/spending/category/{id}" : {
+      "get" : {
+        "summary" : "Get all spending categories",
+        "description" : "This call will return all the categories of expenditures made.",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/category"
+                }
+              }
+            }
+          }
+        },
+        "tags" : [ "Spending" ]
+      },
+      "put" : {
+        "summary" : "Update category name",
+        "description" : "Update Category name",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Updated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/category"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/spending/summary" : {
+      "get" : {
+        "summary" : "Get spending habits results grouped per month",
+        "description" : "Get all spending activities grouped per month and by the sum of each category",
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    }
+  },
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/ELCIDCHAWA/finmanager/1.0.0"
+  } ],
+  "components" : {
+    "schemas" : {
+      "spending" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "date" : {
+            "type" : "string",
+            "format" : "dd/mm/yyyy"
+          },
+          "amount" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "category" : {
+            "type" : "string"
+          }
+        },
+        "description" : "spending details schema. Has the date, category, amount paid"
+      },
+      "spendingList" : {
+        "description" : "List of sendings",
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/spending"
+        }
+      },
+      "category" : {
+        "description" : "category of spending or spending habits sucn as (fuel, food, leisure, insurance ...)",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "categories" : {
+        "description" : "List of categories",
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/category"
+        }
+      }
+    }
+  }
+}

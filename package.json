@@ -2,8 +2,11 @@
   "name": "finmanager-backend",
   "version": "1.0.0",
   "description": "Finmanager app backend API",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
+    "dev": "nodemon ./src/server.js",
+    "start": "node ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +20,20 @@
   },
   "homepage": "https://github.com/FINMANAGER/FINMANAGER-BACKEND#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "firebase": "^9.14.0",
+    "firebase-admin": "^11.2.1",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
